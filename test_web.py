@@ -17,12 +17,12 @@ def extractor():
     date = extract_util.get_date(url)
     text = extract_util.get_text(url)
     answer = '<h1>Extracted info</h1>'
-    answer = answer + '\n<b>ULR: </b>' + url
-    answer = answer + '\n<b>title:</b> ' + title
-    answer = answer + '\n<b>date:</b>' + date
-    answer = answer + '\n<b>text:</b>\n' + text
+    answer = answer + '\n<p><b>ULR: </b>' + url + '/<p>'
+    answer = answer + '\n<p><b>title:</b> ' + title + '/<p>'
+    answer = answer + '\n<p><b>date:</b>' + str(date) + '/<p>'
+    answer = answer + '\n<p><b>text:</b>\n' + text + '/<p>'
     return answer
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
