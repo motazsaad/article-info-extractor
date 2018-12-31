@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 import extract_util
 from socket import gethostname
-
+import os 
 
 app = Flask(__name__)
 
@@ -20,9 +20,9 @@ def extractor():
     text = extract_util.get_text(url)
     answer = '<h1>Extracted info</h1>'
     answer = answer + '\n<p><b>ULR: </b>' + url + '/<p>'
-    answer = answer + '\n<p><b>title:</b> ' + title + '/<p>'
-    answer = answer + '\n<p><b>date:</b>' + str(date) + '/<p>'
-    answer = answer + '\n<p><b>text:</b>\n' + text + '/<p>'
+    answer = answer + '\n<p><b>title: </b> ' + title + '/<p>'
+    answer = answer + '\n<p><b>date: </b>' + str(date) + '/<p>'
+    answer = answer + '\n<p><b>text: </b>\n' + text + '/<p>'
     return answer
 
 # sudo ufw enable
