@@ -15,14 +15,24 @@ def welcome():
 @app.route('/extractor')
 def extractor():
     url = request.args.get('url')
+    url = url.strip()
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
     text = extract_util.get_text(url)
-    answer = '<h1>Extracted info</h1>'
-    answer = answer + '\n<p><b>ULR: </b>' + url + '/<p>'
-    answer = answer + '\n<p><b>title: </b> ' + title + '/<p>'
-    answer = answer + '\n<p><b>date: </b>' + str(date) + '/<p>'
-    answer = answer + '\n<p><b>text: </b>\n' + text + '/<p>'
+    answer = '''
+    <title> Aricle's info extractor </title>
+    <h1>Aricle's info extractor</h1>
+    <h2>Extracted info</h2>
+    <hr>
+    <p><b>ULR:</b> {} 
+    <hr>
+    <p><b>title:</b> {} 
+    <hr>
+    <p><b>date:</b> {}
+    <hr>
+    <p><b>text:</b> {}
+    '''.format(url, title, str(date), text)
+    
     return answer
 
 # sudo ufw enable

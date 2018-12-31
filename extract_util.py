@@ -12,10 +12,10 @@ def get_title(url):
         soup_doc = BeautifulSoup(html_doc, 'html.parser')
         title = soup_doc.title.text
     except RequestException as error:
-        title = None 
-        print('error: {}'.format(error))
+        title = 'Request error: {}'.format(error) 
+        print('Request error: {}'.format(error))
     except BaseException as error:
-        title = None
+        title = 'error: {}'.format(error)
         print('error: {}'.format(error))
     return title
     
@@ -25,7 +25,7 @@ def get_date(url):
         article_date = articleDateExtractor.extractArticlePublishedDate(url)
     except BaseException as error:
         print('error: {}'.format(error))
-        article_date = None 
+        article_date = 'error: {}'.format(error) 
     return article_date
     
 def get_dates(url):
@@ -34,10 +34,10 @@ def get_dates(url):
         text_doc = BeautifulSoup(html_doc, 'html.parser').text
         dates = extract_dates(text_doc)
     except RequestException as error:
-        dates = None 
-        print('error: {}'.format(error))
+        dates = 'Request error: {}'.format(error) 
+        print('Request error: {}'.format(error))
     except BaseException as error:
-        dates = None 
+        dates = 'error: {}'.format(error) 
         print('error: {}'.format(error))
     return dates
     
@@ -46,6 +46,6 @@ def get_text(url):
         extractor = Extractor(extractor='ArticleExtractor', url=url)
         extracted_text = extractor.getText()
     except BaseException as error:
-        extracted_text = None 
+        extracted_text = 'error: {}'.format(error) 
         print('error: {}'.format(error))
     return extracted_text
