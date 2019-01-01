@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 from boilerpipe.extract import Extractor
 from requests.exceptions import RequestException
-
+import datetime
     
 def get_title(url):
     try:
@@ -26,20 +26,25 @@ def get_date(url):
     except BaseException as error:
         print('error: {}'.format(error))
         article_date = 'error: {}'.format(error) 
-    return article_date
+    return article_date.strftime('%Y-%m-%d')
+    
     
 def get_dates(url):
     try:
+        date_str = ''
         html_doc = requests.get(url).text
         text_doc = BeautifulSoup(html_doc, 'html.parser').text
         dates = extract_dates(text_doc)
+        for d in dates:
+            if isinstance(d, datetime.datetime):
+                date_str += d.strftime('%Y-%m-%d') + '\n'
     except RequestException as error:
-        dates = 'Request error: {}'.format(error) 
+        date_str = 'Request error: {}'.format(error) 
         print('Request error: {}'.format(error))
     except BaseException as error:
-        dates = 'error: {}'.format(error) 
+        date_str = 'error: {}'.format(error) 
         print('error: {}'.format(error))
-    return dates
+    return date_str
     
 def get_text(url):
     try:
