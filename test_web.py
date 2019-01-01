@@ -19,7 +19,6 @@ def extractor():
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
     text = extract_util.get_text(url)
-    dates = extract_util.get_dates(url)
     answer = '''
     <title> Aricle's info extractor </title>
     <h1>Aricle's info extractor</h1>
@@ -33,8 +32,7 @@ def extractor():
     <hr>
     <p><b>text:</b></p> <p>{}</p>
     <hr>
-    <p><b>dates:</b></p> <xmp>{}</xmp>
-    '''.format(url, title, date, text, dates)
+    '''.format(url, title, date, text)
     
     return answer
 
