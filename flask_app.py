@@ -44,8 +44,9 @@ def extractor():
 if __name__ == '__main__':
 	print(gethostname())
 	#################################
-	# for pythonanywhere 
-	app.run() 
+	# for pythonanywhere
+	if 'liveconsole' not in gethostname():
+	    app.run()
     #################################
     # for c9.io 
 	# app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
