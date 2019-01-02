@@ -9,6 +9,7 @@ import datetime
 def get_title(url):
     try:
         html_doc = requests.get(url)
+        print('connection status:', html_doc.status)
         soup_doc = BeautifulSoup(html_doc.text, 'html.parser')
         title = soup_doc.title.text
     except RequestException as error:
