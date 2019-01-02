@@ -5,15 +5,18 @@ import requests
 from boilerpipe.extract import Extractor
 from requests.exceptions import RequestException
 import datetime
-    
+from http.client import responses
+
+
 def get_title(url):
     try:
         html_doc = requests.get(url)
-        if html_doc.status_code is 200:
+        status = html_doc.status_code
+        if status is 200:
             soup_doc = BeautifulSoup(html_doc.text, 'html.parser')
             title = soup_doc.title.text
         else:
-            title = 'connection error: ' + html_doc.status_code
+            title = 'connection error: {} {}'.format(str(status), responses[status])
     except RequestException as error:
         title = 'Request error: {}'.format(error) 
         print('Request error: {}'.format(error))
