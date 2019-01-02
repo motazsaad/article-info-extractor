@@ -16,6 +16,8 @@ def welcome():
 def extractor():
     url = request.args.get('url')
     url = url.strip()
+    if not url:
+        return '<h1>Aricle\'s info extractor</h1> <h2>error: No URL</h2>'
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
     text = extract_util.get_text(url)
