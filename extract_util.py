@@ -9,9 +9,11 @@ import datetime
 def get_title(url):
     try:
         html_doc = requests.get(url)
-        print('connection status:', html_doc.status_code)
-        soup_doc = BeautifulSoup(html_doc.text, 'html.parser')
-        title = soup_doc.title.text
+        if html_doc.status_code is 200:
+            soup_doc = BeautifulSoup(html_doc.text, 'html.parser')
+            title = soup_doc.title.text
+        else:
+            title = 'connection error: ' + html_doc.status_code
     except RequestException as error:
         title = 'Request error: {}'.format(error) 
         print('Request error: {}'.format(error))
