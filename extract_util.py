@@ -23,10 +23,11 @@ def get_title(url):
 def get_date(url):
     try:
         article_date = articleDateExtractor.extractArticlePublishedDate(url)
+        article_date = article_date.strftime('%Y-%m-%d')
     except BaseException as error:
         print('error: {}'.format(error))
         article_date = 'error: {}'.format(error) 
-    return article_date.strftime('%Y-%m-%d')
+    return article_date
     
     
 def get_dates(url):
