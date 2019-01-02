@@ -8,8 +8,8 @@ import datetime
     
 def get_title(url):
     try:
-        html_doc = requests.get(url).text
-        soup_doc = BeautifulSoup(html_doc, 'html.parser')
+        html_doc = requests.get(url)
+        soup_doc = BeautifulSoup(html_doc.text, 'html.parser')
         title = soup_doc.title.text
     except RequestException as error:
         title = 'Request error: {}'.format(error) 
