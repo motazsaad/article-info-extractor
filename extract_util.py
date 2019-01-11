@@ -7,6 +7,7 @@ from requests.exceptions import RequestException
 import datetime
 from http.client import responses
 import justext
+from alphabet_detector import AlphabetDetector
 
 def get_title(url):
     try:
@@ -64,10 +65,13 @@ def get_text_boilerpipe(url):
     
     
 def get_text_justext(url):
+    alpha_det = AlphabetDetector()
     try:
         extracted_text = ''
         response = requests.get(url)
-        paragraphs = justext.justext(response.content, justext.get_stoplist('Arabic'))
+        contents = response.content
+        # paragraphs = justext.justext(contents, justext.get_stoplist('Arabic'))
+        paragraphs = justext.justext(contents, justext.get_stoplist('English'))
         for paragraph in paragraphs:
             # print(type(paragraph))
             if not paragraph.is_boilerplate:
