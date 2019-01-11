@@ -3,6 +3,8 @@ from flask import request
 import extract_util
 from socket import gethostname
 import os 
+from alphabet_detector import AlphabetDetector
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,7 @@ def welcome():
 
 @app.route('/extractor')
 def extractor():
+    alpha_det = AlphabetDetector()
     url = request.args.get('url')
     url = url.strip()
     if not url:
@@ -21,7 +24,16 @@ def extractor():
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
     text_boilerpipe = extract_util.get_text_boilerpipe(url)
+    if 'ARABIC' in alpha_det.detect_alphabet(text_boilerpipe):
+        text_boilerpipe = '''<div dir="rtl" align="right"><xmp>''' + text_boilerpipe + '''</xmp></div>'''
+    else:
+        text_boilerpipe = '''<div dir="ltr" align="left"><xmp>''' + text_boilerpipe + '''</xmp></div>'''
     text_justext = extract_util.get_text_justext(url)
+    if 'ARABIC' in alpha_det.detect_alphabet(text_justext):
+        text_justext = '''<div dir="rtl" align="right"><xmp>''' + text_justext + '''</xmp></div>'''
+    else:
+        text_justext = '''<div dir="ltr" align="left"><xmp>''' + text_justext + '''</xmp></div>'''
+    
     answer = '''
     <title> Aricle's info extractor </title>
     <h1>Aricle's info extractor</h1>
@@ -33,9 +45,9 @@ def extractor():
     <hr>
     <p><b>date:</b> {} </p>
     <hr>
-    <p><b>text boilerpipe:</b></p> <xmp>{}</xmp>
+    <p><b>text boilerpipe:</b></p> {}
     <hr>
-    <p><b>text justext:</b></p> <xmp>{}</xmp>
+    <p><b>text justext:</b></p> {}
     <hr>
     '''.format(url, title, date, text_boilerpipe, text_justext)
     

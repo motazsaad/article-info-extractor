@@ -3,4 +3,5 @@ articleDateExtractor
 pytz
 date-extractor
 Justext
+alphabet-detector
 
