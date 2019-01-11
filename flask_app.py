@@ -20,7 +20,8 @@ def extractor():
         return '<h1>Aricle\'s info extractor</h1> <h2>error: No URL</h2>'
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
-    text = extract_util.get_text(url)
+    text_boilerpipe = extract_util.get_text_boilerpipe(url)
+    text_justext = extract_util.get_text_justext(url)
     answer = '''
     <title> Aricle's info extractor </title>
     <h1>Aricle's info extractor</h1>
@@ -32,9 +33,11 @@ def extractor():
     <hr>
     <p><b>date:</b> {} </p>
     <hr>
-    <p><b>text:</b></p> <p>{}</p>
+    <p><b>text boilerpipe:</b></p> <xmp>{}</xmp>
     <hr>
-    '''.format(url, title, date, text)
+    <p><b>text justext:</b></p> <xmp>{}</xmp>
+    <hr>
+    '''.format(url, title, date, text_boilerpipe, text_justext)
     
     return answer
 
@@ -47,9 +50,9 @@ if __name__ == '__main__':
 	print(gethostname())
 	#################################
 	# for pythonanywhere
-	if 'liveconsole' not in gethostname():
-	    app.run()
+    # if 'liveconsole' not in gethostname():
+    # app.run()
     #################################
     # for c9.io 
-	# app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
+	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
 	#################################

@@ -2,12 +2,14 @@
 Extract title, date, text from web articles.
 
 
-## References
+## References (last update Jan 11, 2019)
 * Date Extractors: 
     * https://github.com/DanielJDufour/date-extractor
     * https://github.com/Webhose/article-date-extractor
 * Contents Extractor 
     * https://github.com/misja/python-boilerpipe
+    * https://github.com/miso-belica/jusText (last update Mar 5, 2017)
+    * https://github.com/grangier/python-goose (last update Mar 29, 2015)
 * 3 HTML text extractors in Python
     * http://www.lleess.com/2013/03/3-html-text-extractors-in-python.htm
 * Extract title:

@@ -6,7 +6,7 @@ from boilerpipe.extract import Extractor
 from requests.exceptions import RequestException
 import datetime
 from http.client import responses
-
+import justext
 
 def get_title(url):
     try:
@@ -53,11 +53,26 @@ def get_dates(url):
         print('error: {}'.format(error))
     return date_str
     
-def get_text(url):
+def get_text_boilerpipe(url):
     try:
         extractor = Extractor(extractor='ArticleExtractor', url=url)
         extracted_text = extractor.getText()
     except BaseException as error:
+        extracted_text = 'error: {}'.format(error) 
+        print('error: {}'.format(error))
+    return extracted_text
+    
+    
+def get_text_justext(url):
+    try:
+        extracted_text = ''
+        response = requests.get(url)
+        paragraphs = justext.justext(response.content, justext.get_stoplist('Arabic'))
+        for paragraph in paragraphs:
+            # print(type(paragraph))
+            if not paragraph.is_boilerplate:
+                extracted_text += paragraph.text + '\n'
+    except RequestException as error:
         extracted_text = 'error: {}'.format(error) 
         print('error: {}'.format(error))
     return extracted_text
