@@ -41,13 +41,13 @@ def extractor():
     <hr>
     <p><b>ULR:</b> {} </p>
     <hr>
-    <p><b>title:</b> {} </p>
+    <p><b>Title:</b> {} </p>
     <hr>
     <p><b>date:</b> {} </p>
     <hr>
-    <p><b>text boilerpipe:</b></p> {}
+    <p><b>Text boilerpipe:</b></p> {}
     <hr>
-    <p><b>text justext:</b></p> {}
+    <p><b>Text justext:</b></p> {}
     <hr>
     '''.format(url, title, date, text_boilerpipe, text_justext)
     

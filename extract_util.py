@@ -70,8 +70,17 @@ def get_text_justext(url):
         extracted_text = ''
         response = requests.get(url)
         contents = response.content
-        # paragraphs = justext.justext(contents, justext.get_stoplist('Arabic'))
-        paragraphs = justext.justext(contents, justext.get_stoplist('English'))
+        status = response.status_code
+        if status is 200:
+            soup_doc = BeautifulSoup(response.text, 'html.parser')
+            title = soup_doc.title.text
+        else:
+            title = 'connection error: {} {}'.format(str(status), responses[status])
+            return title
+        if 'ARABIC' in alpha_det.detect_alphabet(title):
+            paragraphs = justext.justext(contents, justext.get_stoplist('Arabic'))
+        else:
+            paragraphs = justext.justext(contents, justext.get_stoplist('English'))
         for paragraph in paragraphs:
             # print(type(paragraph))
             if not paragraph.is_boilerplate:
