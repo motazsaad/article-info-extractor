@@ -9,6 +9,8 @@ Extract title, date, text from web articles.
 * Contents Extractor 
     * https://github.com/misja/python-boilerpipe
     * https://github.com/miso-belica/jusText (last update Mar 5, 2017)
+    * https://github.com/codelucas/newspaper (last update Jan 5, 2019) !!! 
+    * https://github.com/fhamborg/news-please (last update Dec 8, 2018)
     * https://github.com/grangier/python-goose (python 2.x only) (last update Mar 29, 2015)
 * 3 HTML text extractors in Python
     * http://www.lleess.com/2013/03/3-html-text-extractors-in-python.htm

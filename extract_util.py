@@ -8,6 +8,8 @@ import datetime
 from http.client import responses
 import justext
 from alphabet_detector import AlphabetDetector
+from newspaper import Article
+from newspaper import fulltext
 
 def get_title(url):
     try:
@@ -89,3 +91,13 @@ def get_text_justext(url):
         extracted_text = 'error: {}'.format(error) 
         print('error: {}'.format(error))
     return extracted_text
+    
+    
+def extrac_newspaper3k(url):
+    article = Article(url)
+    article.download()
+    article.parse()
+    authors = article.authors
+    date = article.publish_date 
+    text = article.text
+    return authors, date, text
