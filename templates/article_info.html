@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article information Extractor</title>
+</head>
+<body>
+{% if url %}
+    <h1>Article info extractor</h1>
+    <h2>Extracted info</h2>
+    <hr>
+    <p>URL: {{ url }} </p>
+    <hr>
+    <p><b>Title:</b> {{ title }} </p>
+    <hr>
+    <p><b>date:</b> {{ date }} </p>
+    <hr>
+        <p><b>Text boilerpipe:</b></p>  
+        <div dir="{{ text_dir }}">  
+        {% for para in text_justext %}
+            <p>{{para}}</p>
+        {% endfor %}
+        </div>
+        <hr>
+        <p><b>Text justext:</b></p> 
+        <div dir="{{ text_dir }}">  
+        {% for para in text_justext %}
+            <p>{{para}}</p>
+        {% endfor %}
+        </div>
+    <hr>
+{% else %}
+    <h2>error: No URL</h2>
+{% endif %}
+
+</body>
+</html>

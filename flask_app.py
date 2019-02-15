@@ -4,6 +4,7 @@ import extract_util
 from socket import gethostname
 import os 
 from alphabet_detector import AlphabetDetector
+from flask import render_template
 
 
 app = Flask(__name__)
@@ -19,40 +20,18 @@ def extractor():
     alpha_det = AlphabetDetector()
     url = request.args.get('url')
     url = url.strip()
-    if not url:
-        return '<h1>Aricle\'s info extractor</h1> <h2>error: No URL</h2>'
     title = extract_util.get_title(url)
     date = extract_util.get_date(url)
     text_boilerpipe = extract_util.get_text_boilerpipe(url)
-    if 'ARABIC' in alpha_det.detect_alphabet(text_boilerpipe):
-        text_boilerpipe = '''<div dir="rtl" align="right"><xmp>''' + text_boilerpipe + '''</xmp></div>'''
-    else:
-        text_boilerpipe = '''<div dir="ltr" align="left"><xmp>''' + text_boilerpipe + '''</xmp></div>'''
     text_justext = extract_util.get_text_justext(url)
-    if 'ARABIC' in alpha_det.detect_alphabet(text_justext):
-        text_justext = '''<div dir="rtl" align="right"><xmp>''' + text_justext + '''</xmp></div>'''
+    text_boilerpipe = text_boilerpipe.split('\n')
+    text_justext = text_justext.split('\n')
+    if 'ARABIC' in alpha_det.detect_alphabet(title):
+        text_dir = 'rtl'
     else:
-        text_justext = '''<div dir="ltr" align="left"><xmp>''' + text_justext + '''</xmp></div>'''
+        text_dir = 'ltr'
+    return render_template('article_info.html', url=url, title=title, date=date, text_dir=text_dir, text_boilerpipe=text_boilerpipe, text_justext=text_justext)
     
-    answer = '''
-    <title> Aricle's info extractor </title>
-    <h1>Aricle's info extractor</h1>
-    <h2>Extracted info</h2>
-    <hr>
-    <p><b>ULR:</b> {} </p>
-    <hr>
-    <p><b>Title:</b> {} </p>
-    <hr>
-    <p><b>date:</b> {} </p>
-    <hr>
-    <p><b>Text boilerpipe:</b></p> {}
-    <hr>
-    <p><b>Text justext:</b></p> {}
-    <hr>
-    '''.format(url, title, date, text_boilerpipe, text_justext)
-    
-    return answer
-
 # sudo ufw enable
 # sudo ufw allow 5000/tcp
 # sudo ufw status verbose
@@ -66,5 +45,5 @@ if __name__ == '__main__':
     # app.run()
     #################################
     # for c9.io 
-	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
+	app.run(debug=True, host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
 	#################################
