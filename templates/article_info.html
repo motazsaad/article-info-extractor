@@ -15,16 +15,30 @@
     <hr>
     <p><b>date:</b> {{ date }} </p>
     <hr>
-        <p><b>Text boilerpipe:</b></p>  
+        <p><b>boilerpipe:</b></p>  
         <div dir="{{ text_dir }}">  
         {% for para in text_justext %}
             <p>{{para}}</p>
         {% endfor %}
         </div>
         <hr>
-        <p><b>Text justext:</b></p> 
+        <p><b>justext:</b></p> 
         <div dir="{{ text_dir }}">  
         {% for para in text_justext %}
+            <p>{{para}}</p>
+        {% endfor %}
+        </div>
+        <hr>
+        <p><b> newspaper3k text:</b></p> 
+        <div dir="{{ text_dir }}">  
+        {% for para in newspaper3k_text %}
+            <p>{{para}}</p>
+        {% endfor %}
+        </div>
+        <hr>
+        <p><b> news-please text:</b></p> 
+        <div dir="{{ text_dir }}">  
+        {% for para in news_please_text %}
             <p>{{para}}</p>
         {% endfor %}
         </div>

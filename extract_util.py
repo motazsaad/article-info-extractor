@@ -10,6 +10,7 @@ import justext
 from alphabet_detector import AlphabetDetector
 from newspaper import Article
 from newspaper import fulltext
+from newsplease import NewsPlease
 
 def get_title(url):
     try:
@@ -93,11 +94,22 @@ def get_text_justext(url):
     return extracted_text
     
     
-def extrac_newspaper3k(url):
+def extract_newspaper3k(url):
     article = Article(url)
     article.download()
     article.parse()
     authors = article.authors
     date = article.publish_date 
     text = article.text
-    return authors, date, text
+    title = article.title
+    print ('newspaper3k title:', title)
+    print ('newspaper3k authors:', authors)
+    print ('newspaper3k date:', date)
+    return  title, text
+    
+def extract_news_please(url):
+    article = NewsPlease.from_url(url)
+    title = article.title 
+    text = article.text
+    print('news-please title:', title)
+    return text 

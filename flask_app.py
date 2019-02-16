@@ -20,17 +20,23 @@ def extractor():
     alpha_det = AlphabetDetector()
     url = request.args.get('url')
     url = url.strip()
-    title = extract_util.get_title(url)
+    # title = extract_util.get_title(url)
+    title, newspaper3k_text = extract_util.extract_newspaper3k(url)
     date = extract_util.get_date(url)
     text_boilerpipe = extract_util.get_text_boilerpipe(url)
     text_justext = extract_util.get_text_justext(url)
+    news_please_text = extract_util.extract_news_please(url)
+
     text_boilerpipe = text_boilerpipe.split('\n')
     text_justext = text_justext.split('\n')
+    newspaper3k_text = newspaper3k_text.split('\n')
+    news_please_text = news_please_text.split('\n')
+    
     if 'ARABIC' in alpha_det.detect_alphabet(title):
         text_dir = 'rtl'
     else:
         text_dir = 'ltr'
-    return render_template('article_info.html', url=url, title=title, date=date, text_dir=text_dir, text_boilerpipe=text_boilerpipe, text_justext=text_justext)
+    return render_template('article_info.html', url=url, title=title, date=date, text_dir=text_dir, text_boilerpipe=text_boilerpipe, text_justext=text_justext, newspaper3k_text=newspaper3k_text, news_please_text=news_please_text)
     
 # sudo ufw enable
 # sudo ufw allow 5000/tcp
