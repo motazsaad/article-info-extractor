@@ -106,6 +106,16 @@ def extract_newspaper3k(url):
     print ('newspaper3k authors:', authors)
     print ('newspaper3k date:', date)
     return  title, text
+   
+    
+    
+def extract_newspaper3k_v2(url):
+    article = Article(url)
+    article.download()
+    article.parse()
+    article.nlp()
+    return article
+    
     
 def extract_news_please(url):
     article = NewsPlease.from_url(url)
@@ -113,3 +123,9 @@ def extract_news_please(url):
     text = article.text
     print('news-please title:', title)
     return text 
+    
+def refine_Arabic_keywords(keywords):
+    stopwords = open('stopwords.ar').read().splitlines()
+    my_keywords = [key for key in keywords if key not in stopwords]
+    return '\t'.join(my_keywords)
+        

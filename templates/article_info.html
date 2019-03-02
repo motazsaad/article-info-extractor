@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Article information Extractor</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
 {% if url %}
     <h1>Article info extractor</h1>
     <h2>Extracted info</h2>
@@ -15,28 +11,28 @@
     <hr>
     <p><b>date:</b> {{ date }} </p>
     <hr>
-        <p><b>boilerpipe:</b></p>  
+        <h1><b>boilerpipe:</b></h1>  
         <div dir="{{ text_dir }}">  
         {% for para in text_justext %}
             <p>{{para}}</p>
         {% endfor %}
         </div>
         <hr>
-        <p><b>justext:</b></p> 
+        <h1><b>justext:</b></h1> 
         <div dir="{{ text_dir }}">  
         {% for para in text_justext %}
             <p>{{para}}</p>
         {% endfor %}
         </div>
         <hr>
-        <p><b> newspaper3k text:</b></p> 
+        <h1><b> newspaper3k text:</b></h1> 
         <div dir="{{ text_dir }}">  
         {% for para in newspaper3k_text %}
             <p>{{para}}</p>
         {% endfor %}
         </div>
         <hr>
-        <p><b> news-please text:</b></p> 
+        <h1><b> news-please text:</b></h1> 
         <div dir="{{ text_dir }}">  
         {% for para in news_please_text %}
             <p>{{para}}</p>
@@ -47,5 +43,4 @@
     <h2>error: No URL</h2>
 {% endif %}
 
-</body>
-</html>
+{% endblock %}

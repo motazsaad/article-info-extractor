@@ -6,4 +6,5 @@ Justext
 alphabet-detector
 news-please 
 newspaper3k 
-
+WTForms
+flask-wtf
