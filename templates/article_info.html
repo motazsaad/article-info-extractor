@@ -1,51 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Article information Extractor</title>
-</head>
-<body>
-{% if url %}
-    <h1>Article info extractor</h1>
-    <h2>Extracted info</h2>
-    <hr>
-    <p>URL: {{ url }} </p>
-    <hr>
-    <p><b>Title:</b> {{ title }} </p>
-    <hr>
-    <p><b>date:</b> {{ date }} </p>
-    <hr>
-        <p><b>boilerpipe:</b></p>  
-        <div dir="{{ text_dir }}">  
-        {% for para in text_justext %}
-            <p>{{para}}</p>
-        {% endfor %}
-        </div>
-        <hr>
-        <p><b>justext:</b></p> 
-        <div dir="{{ text_dir }}">  
-        {% for para in text_justext %}
-            <p>{{para}}</p>
-        {% endfor %}
-        </div>
-        <hr>
-        <p><b> newspaper3k text:</b></p> 
-        <div dir="{{ text_dir }}">  
-        {% for para in newspaper3k_text %}
-            <p>{{para}}</p>
-        {% endfor %}
-        </div>
-        <hr>
-        <p><b> news-please text:</b></p> 
-        <div dir="{{ text_dir }}">  
-        {% for para in news_please_text %}
-            <p>{{para}}</p>
-        {% endfor %}
-        </div>
-    <hr>
-{% else %}
-    <h2>error: No URL</h2>
-{% endif %}
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<h1>Article info extractor</h1>
+<h2>Extracted info</h2>
+<hr>
+<p>URL: {{ url }} </p>
+<hr>
+<p><b>Title:</b> {{ title }} </p>
+<hr>
+<p><b>date:</b> {{ date }} </p>
+<hr>
+{% for lib, text in texts.items() %}
+    <h2><b> {{ lib }} </b></h2>  
+    <div dir="{{ text_dir }}">  
+    {% for para in text %}
+        <p>{{para}}</p>
+    {% endfor %}
+    </div>
+    <hr>
+{% endfor %}
+
+{% endblock %}

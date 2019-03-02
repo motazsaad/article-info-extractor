@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article information Extractor</title>
+</head>
+<body>
+    <h1>Article info extractor</h1>
+    <h2>Extracted info</h2>
+    <hr>
+    <p>URL: {{ url }} </p>
+    <hr>
+    <p><b>Title:</b> {{ title }} </p>
+    <hr>
+    <p><b>date:</b> {{ date }} </p>
+    <hr>
+    <h1><b> keywords :</b></h1> 
+    <div dir="{{ text_dir }}">  
+        <p>{{keywords}}</p>
+    </div>
+    <hr>
+    <h1><b> text:</b></h1> 
+    <div dir="{{ text_dir }}">  
+    {% for para in newspaper3k_text %}
+        <p>{{para}}</p>
+    {% endfor %}
+    </div>
+    <hr>
+    <h1><b> images :</b></h1> 
+    {% for img in images %}
+        <img src={{img}}>
+    {% endfor %}
+    <hr>
+
+</body>
+</html>

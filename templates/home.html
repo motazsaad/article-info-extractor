@@ -1,0 +1,22 @@
+<html>
+    <head>
+      <title>Welcome to Article Extractor :)</title>
+    </head>
+    <body>
+        <div>Navigate: <a href="/">Home</a></div> 
+        <hr>
+        <div>Test URLs using all libraries:</div>
+        <ol>
+        {% for url in urls %}
+            <li><a href="/extractor?url={{url}}">{{url}}</a></li>
+        {% endfor %} 
+        </ol>
+        <hr>
+        <div>Test URLs using all newspaper3k:</div>
+        <ol>
+        {% for url in urls %}
+            <li><a href="/newspaper3k?url={{url}}">{{url}}</a></li>
+        {% endfor %} 
+        </ol>
+    </body>
+</html>

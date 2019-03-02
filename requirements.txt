@@ -6,4 +6,4 @@ Justext
 alphabet-detector
 news-please 
 newspaper3k 
-
+pextract
