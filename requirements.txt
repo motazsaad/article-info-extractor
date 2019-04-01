@@ -8,4 +8,4 @@ news-please
 newspaper3k 
 pextract
 gunicorn
-git+https://github.com/misja/python-boilerpipe.git#egg=python-boilerpipe
+git+https://github.com/misja/python-boilerpipe.git
