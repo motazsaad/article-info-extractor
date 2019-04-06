@@ -42,13 +42,9 @@ def extractor():
     text_pextract = util.get_pextract(url)
 
     texts = OrderedDict()
-    text_justext = text_justext.split('\n')
     texts['Justext'] = text_justext
-    newspaper3k_text = newspaper3k_text.split('\n')
     texts['Newspaper3k'] = newspaper3k_text
-    news_please_text = news_please_text.split('\n')
     texts['NewsPlease'] = news_please_text
-    text_pextract = text_pextract.split('\n')
     texts['pextract'] = text_pextract
 
     return render_template('article_info.html', url=url, title=title, date=date, text_dir=text_dir, texts=texts)

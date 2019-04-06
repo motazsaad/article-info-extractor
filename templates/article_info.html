@@ -12,10 +12,12 @@
 <hr>
 {% for lib, text in texts.items() %}
     <h2><b> {{ lib }} </b></h2>  
-    <div dir="{{ text_dir }}">  
-    {% for para in text %}
-        <p>{{para}}</p>
-    {% endfor %}
+    <div dir="{{ text_dir }}">
+        {% if text %}
+            {% for para in text.split('\n') %}
+                <p>{{para}}</p>
+            {% endfor %}
+        {% endif %}
     </div>
     <hr>
 {% endfor %}

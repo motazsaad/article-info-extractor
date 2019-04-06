@@ -29,3 +29,7 @@ pip3 install -r requirements.txt
 
 
 ```
+
+# Demo
+
+https://news-info.herokuapp.com/ 
