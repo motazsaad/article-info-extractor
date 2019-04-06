@@ -6,7 +6,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
-import extract_util
+import extract_util2 as util
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def extractor():
         return render_template('no_url.html')
     url = url.strip()
     # title = extract_util.get_title(url)
-    title, newspaper3k_text = extract_util.extract_newspaper3k(url)
+    title, newspaper3k_text = util.extract_newspaper3k(url)
 
     if 'ARABIC' in alpha_det.detect_alphabet(title):
         text_dir = 'rtl'
@@ -35,24 +35,19 @@ def extractor():
         text_dir = 'ltr'
         lang = 'English'
 
-    date = extract_util.get_date(url)
-    text_boilerpipe = extract_util.get_text_boilerpipe(url)
-    text_justext = extract_util.get_text_justext(url, lang)
-    news_please_text = extract_util.extract_news_please(url)
+    date = util.get_date(url)
+    text_justext = util.get_text_justext(url, lang)
+    news_please_text = util.extract_news_please(url)
     # _, bs4_text = extract_util.get_title_text_BS4(url)
-    text_pextract = extract_util.get_pextract(url)
+    text_pextract = util.get_pextract(url)
 
     texts = OrderedDict()
-    text_boilerpipe = text_boilerpipe.split('\n')
-    texts['Boilerpipe'] = text_boilerpipe
     text_justext = text_justext.split('\n')
     texts['Justext'] = text_justext
     newspaper3k_text = newspaper3k_text.split('\n')
     texts['Newspaper3k'] = newspaper3k_text
     news_please_text = news_please_text.split('\n')
     texts['NewsPlease'] = news_please_text
-    # bs4_text = bs4_text.split('\n')
-    # texts['BeautifulSoup'] = bs4_text
     text_pextract = text_pextract.split('\n')
     texts['pextract'] = text_pextract
 
